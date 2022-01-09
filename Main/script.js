@@ -20,6 +20,7 @@ var finalPassword = [];
 //randvalue for each input
 var numberRand = Math.floor(Math.random() * numbers.length);
 var letterRand = Math.floor(Math.random() * upperCase.length);
+var lowletterRand = Math.floor(Math.random() * lowerCase.length);
 var specialRand = Math.floor(Math.random() * special.length);
 
 //debug logging array variable values
@@ -46,7 +47,7 @@ function generatePassword() {
   }
 
   if (confirm("Do you want to include lowercase letters")) {
-    options = options.concat(lowerCase[letterRand]);
+    options = options.concat(lowerCase[lowletterRand]);
   }
 
   if (confirm("Do you want to include special characters")) {
@@ -65,11 +66,14 @@ function generatePassword() {
   }
 
   //applies password length to the array
-  options.length = passwordLength
+  //options.length = passwordLength < -- man o man did this break things. *THAT WAS THE BUG* 
+  // moral of the story: dont modify existing arrays - make new ones if you need to.
 
   //password length debuging loggers
   console.log(passwordLength);
   console.log(options.length);
+  
+
 
   //loop array with password length
   for (i = 0; i < passwordLength; i++) {
